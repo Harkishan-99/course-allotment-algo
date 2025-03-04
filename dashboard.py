@@ -89,6 +89,10 @@ if teaching_history_file and teaching_preference_file and course_requirements_fi
     st.header("Allocation Results")
     allocation_df = pd.DataFrame(list(allocations.items()), columns=["Faculty Name", "Assigned Course"])
     st.table(allocation_df)
+
+    # Download Button for Allocations
+    csv = allocation_df.to_csv(index=False).encode('utf-8')
+    st.download_button(label="Download Allocation as CSV", data=csv, file_name="faculty_allocation.csv", mime="text/csv")
     
     st.header("Unallotted Sections")
     unallotted_df = pd.DataFrame(unallotted_sections, columns=["Unallotted Course Sections"])
